@@ -42,6 +42,10 @@ namespace TRAEGERKepware
             this.tbProgId = new System.Windows.Forms.TextBox();
             this.lbProgId = new System.Windows.Forms.Label();
             this.lbConnectionString = new System.Windows.Forms.Label();
+            this.tbValue1 = new System.Windows.Forms.TextBox();
+            this.btRead = new System.Windows.Forms.Button();
+            this.tbValue2 = new System.Windows.Forms.TextBox();
+            this.tbValue3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbNodes
@@ -184,11 +188,56 @@ namespace TRAEGERKepware
             this.lbConnectionString.TabIndex = 12;
             this.lbConnectionString.Text = "Connection String";
             // 
+            // tbValue1
+            // 
+            this.tbValue1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValue1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbValue1.Location = new System.Drawing.Point(360, 283);
+            this.tbValue1.Name = "tbValue1";
+            this.tbValue1.Size = new System.Drawing.Size(100, 22);
+            this.tbValue1.TabIndex = 14;
+            // 
+            // btRead
+            // 
+            this.btRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btRead.Location = new System.Drawing.Point(118, 354);
+            this.btRead.Name = "btRead";
+            this.btRead.Size = new System.Drawing.Size(100, 26);
+            this.btRead.TabIndex = 15;
+            this.btRead.Text = "READ";
+            this.btRead.UseVisualStyleBackColor = true;
+            this.btRead.Click += new System.EventHandler(this.btRead_Click);
+            // 
+            // tbValue2
+            // 
+            this.tbValue2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValue2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbValue2.Location = new System.Drawing.Point(466, 283);
+            this.tbValue2.Name = "tbValue2";
+            this.tbValue2.Size = new System.Drawing.Size(100, 22);
+            this.tbValue2.TabIndex = 16;
+            // 
+            // tbValue3
+            // 
+            this.tbValue3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValue3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbValue3.Location = new System.Drawing.Point(572, 283);
+            this.tbValue3.Name = "tbValue3";
+            this.tbValue3.Size = new System.Drawing.Size(100, 22);
+            this.tbValue3.TabIndex = 17;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.tbValue3);
+            this.Controls.Add(this.tbValue2);
+            this.Controls.Add(this.btRead);
+            this.Controls.Add(this.tbValue1);
             this.Controls.Add(this.lbConnectionString);
             this.Controls.Add(this.tbProgId);
             this.Controls.Add(this.lbProgId);
@@ -226,6 +275,10 @@ namespace TRAEGERKepware
         private System.Windows.Forms.TextBox tbProgId;
         private System.Windows.Forms.Label lbProgId;
         private System.Windows.Forms.Label lbConnectionString;
+        private System.Windows.Forms.TextBox tbValue1;
+        private System.Windows.Forms.Button btRead;
+        private System.Windows.Forms.TextBox tbValue2;
+        private System.Windows.Forms.TextBox tbValue3;
     }
 }
 

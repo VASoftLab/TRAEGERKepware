@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Opc.UaFx;
 using Opc.UaFx.Client;
 using Opc.UaFx.Client.Classic;
-
 
 namespace TRAEGERKepware
 {
@@ -74,10 +74,12 @@ namespace TRAEGERKepware
 
                 _Client.Dispose();
                 _Client = null;
+                
+                lbStatus.Text = "OPC Client: UKNOWN";
             }
             finally
             {
-                lbStatus.Text = "OPC Client: UKNOWN";
+                
             }
             
         }
@@ -108,12 +110,30 @@ namespace TRAEGERKepware
                     tbClassId.Text = selected.ClassId.ToString();
                     tbProgId.Text = selected.ProgId;
                     
-                    string port = "32402"; // Default Kepware Port
+                    string port = "49320"; // Default Kepware Port
                     string progId = selected.ProgId;
                     string classId = selected.ClassId.ToString().ToUpper(); 
                     tbConnectionString.Text = $"opc.com://localhost:{port}/{progId}/{classId}";
                 }
             }
+        }
+
+        private void btRead_Click(object sender, EventArgs e)
+        {
+            if (_Client == null)
+                return;
+
+            OpcReadNode[] commands = new OpcReadNode[] {
+                new OpcReadNode("ns=2;s=Simulation Examples.Functions.Sine1"),
+                new OpcReadNode("ns=2;s=Simulation Examples.Functions.Sine2"),
+                new OpcReadNode("ns=2;s=Simulation Examples.Functions.Sine3")
+            };
+
+            // IEnumerable<OpcValue> job = _Client.ReadNodes(commands);
+            List<OpcValue> job = _Client.ReadNodes(commands).ToList();
+            tbValue1.Text = job[0].Value.ToString();
+            tbValue2.Text = job[1].Value.ToString();
+            tbValue3.Text = job[2].Value.ToString();
         }
     }
 }
