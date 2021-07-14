@@ -42,29 +42,29 @@ namespace TRAEGERKepware
             this.tbProgId = new System.Windows.Forms.TextBox();
             this.lbProgId = new System.Windows.Forms.Label();
             this.lbConnectionString = new System.Windows.Forms.Label();
-            this.tbValue1 = new System.Windows.Forms.TextBox();
             this.btRead = new System.Windows.Forms.Button();
-            this.tbValue2 = new System.Windows.Forms.TextBox();
-            this.tbValue3 = new System.Windows.Forms.TextBox();
+            this.tbPort = new System.Windows.Forms.TextBox();
+            this.lpPort = new System.Windows.Forms.Label();
+            this.T5G3 = new TRAEGERKepware.UCGrid();
+            this.T4G3 = new TRAEGERKepware.UCGrid();
+            this.T3G3 = new TRAEGERKepware.UCGrid();
             this.SuspendLayout();
             // 
             // lbNodes
             // 
-            this.lbNodes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbNodes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbNodes.FormattingEnabled = true;
             this.lbNodes.ItemHeight = 16;
             this.lbNodes.Location = new System.Drawing.Point(12, 13);
             this.lbNodes.Name = "lbNodes";
-            this.lbNodes.Size = new System.Drawing.Size(660, 180);
+            this.lbNodes.Size = new System.Drawing.Size(369, 180);
             this.lbNodes.TabIndex = 0;
             this.lbNodes.SelectedIndexChanged += new System.EventHandler(this.lbNodes_SelectedIndexChanged);
             // 
             // btBrowse
             // 
             this.btBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btBrowse.Location = new System.Drawing.Point(12, 354);
+            this.btBrowse.Location = new System.Drawing.Point(281, 285);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(100, 26);
             this.btBrowse.TabIndex = 1;
@@ -74,11 +74,10 @@ namespace TRAEGERKepware
             // 
             // btConnect
             // 
-            this.btConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btConnect.Location = new System.Drawing.Point(412, 354);
+            this.btConnect.Location = new System.Drawing.Point(12, 392);
             this.btConnect.Name = "btConnect";
-            this.btConnect.Size = new System.Drawing.Size(100, 26);
+            this.btConnect.Size = new System.Drawing.Size(169, 26);
             this.btConnect.TabIndex = 2;
             this.btConnect.Text = "CONNECT";
             this.btConnect.UseVisualStyleBackColor = true;
@@ -86,11 +85,10 @@ namespace TRAEGERKepware
             // 
             // btDisconnect
             // 
-            this.btDisconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btDisconnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btDisconnect.Location = new System.Drawing.Point(518, 354);
+            this.btDisconnect.Location = new System.Drawing.Point(187, 392);
             this.btDisconnect.Name = "btDisconnect";
-            this.btDisconnect.Size = new System.Drawing.Size(154, 26);
+            this.btDisconnect.Size = new System.Drawing.Size(194, 26);
             this.btDisconnect.TabIndex = 3;
             this.btDisconnect.Text = "DISCONNECT";
             this.btDisconnect.UseVisualStyleBackColor = true;
@@ -101,22 +99,23 @@ namespace TRAEGERKepware
             this.lbStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbStatus.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lbStatus.Location = new System.Drawing.Point(0, 388);
+            this.lbStatus.Location = new System.Drawing.Point(0, 588);
             this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(684, 23);
+            this.lbStatus.Size = new System.Drawing.Size(704, 23);
             this.lbStatus.TabIndex = 4;
             this.lbStatus.Text = "OPC Client: UNKNOWN";
             this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tbConnectionString
             // 
-            this.tbConnectionString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbConnectionString.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbConnectionString.Location = new System.Drawing.Point(12, 326);
+            this.tbConnectionString.Location = new System.Drawing.Point(12, 345);
+            this.tbConnectionString.Multiline = true;
             this.tbConnectionString.Name = "tbConnectionString";
-            this.tbConnectionString.Size = new System.Drawing.Size(660, 22);
+            this.tbConnectionString.ReadOnly = true;
+            this.tbConnectionString.Size = new System.Drawing.Size(370, 41);
             this.tbConnectionString.TabIndex = 5;
+            this.tbConnectionString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbName
             // 
@@ -130,22 +129,20 @@ namespace TRAEGERKepware
             // 
             // tbName
             // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbName.Location = new System.Drawing.Point(106, 199);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(566, 22);
+            this.tbName.ReadOnly = true;
+            this.tbName.Size = new System.Drawing.Size(275, 22);
             this.tbName.TabIndex = 7;
             // 
             // tbClassId
             // 
-            this.tbClassId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbClassId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbClassId.Location = new System.Drawing.Point(106, 227);
             this.tbClassId.Name = "tbClassId";
-            this.tbClassId.Size = new System.Drawing.Size(566, 22);
+            this.tbClassId.ReadOnly = true;
+            this.tbClassId.Size = new System.Drawing.Size(275, 22);
             this.tbClassId.TabIndex = 9;
             // 
             // lbClassId
@@ -160,12 +157,11 @@ namespace TRAEGERKepware
             // 
             // tbProgId
             // 
-            this.tbProgId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbProgId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbProgId.Location = new System.Drawing.Point(106, 255);
             this.tbProgId.Name = "tbProgId";
-            this.tbProgId.Size = new System.Drawing.Size(566, 22);
+            this.tbProgId.ReadOnly = true;
+            this.tbProgId.Size = new System.Drawing.Size(275, 22);
             this.tbProgId.TabIndex = 11;
             // 
             // lbProgId
@@ -182,26 +178,16 @@ namespace TRAEGERKepware
             // 
             this.lbConnectionString.AutoSize = true;
             this.lbConnectionString.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbConnectionString.Location = new System.Drawing.Point(9, 305);
+            this.lbConnectionString.Location = new System.Drawing.Point(12, 324);
             this.lbConnectionString.Name = "lbConnectionString";
             this.lbConnectionString.Size = new System.Drawing.Size(126, 18);
             this.lbConnectionString.TabIndex = 12;
             this.lbConnectionString.Text = "Connection String";
             // 
-            // tbValue1
-            // 
-            this.tbValue1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbValue1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbValue1.Location = new System.Drawing.Point(360, 283);
-            this.tbValue1.Name = "tbValue1";
-            this.tbValue1.Size = new System.Drawing.Size(100, 22);
-            this.tbValue1.TabIndex = 14;
-            // 
             // btRead
             // 
             this.btRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btRead.Location = new System.Drawing.Point(118, 354);
+            this.btRead.Location = new System.Drawing.Point(387, 392);
             this.btRead.Name = "btRead";
             this.btRead.Size = new System.Drawing.Size(100, 26);
             this.btRead.TabIndex = 15;
@@ -209,35 +195,95 @@ namespace TRAEGERKepware
             this.btRead.UseVisualStyleBackColor = true;
             this.btRead.Click += new System.EventHandler(this.btRead_Click);
             // 
-            // tbValue2
+            // tbPort
             // 
-            this.tbValue2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbValue2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbValue2.Location = new System.Drawing.Point(466, 283);
-            this.tbValue2.Name = "tbValue2";
-            this.tbValue2.Size = new System.Drawing.Size(100, 22);
-            this.tbValue2.TabIndex = 16;
+            this.tbPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPort.Location = new System.Drawing.Point(106, 287);
+            this.tbPort.Name = "tbPort";
+            this.tbPort.Size = new System.Drawing.Size(95, 22);
+            this.tbPort.TabIndex = 19;
+            this.tbPort.Text = "49320";
             // 
-            // tbValue3
+            // lpPort
             // 
-            this.tbValue3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbValue3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbValue3.Location = new System.Drawing.Point(572, 283);
-            this.tbValue3.Name = "tbValue3";
-            this.tbValue3.Size = new System.Drawing.Size(100, 22);
-            this.tbValue3.TabIndex = 17;
+            this.lpPort.AutoSize = true;
+            this.lpPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lpPort.Location = new System.Drawing.Point(12, 289);
+            this.lpPort.Name = "lpPort";
+            this.lpPort.Size = new System.Drawing.Size(36, 18);
+            this.lpPort.TabIndex = 18;
+            this.lpPort.Text = "Port";
+            // 
+            // T5G3
+            // 
+            this.T5G3.AFlowMR = 0D;
+            this.T5G3.AFlowMV = 0D;
+            this.T5G3.AFlowSP = 0D;
+            this.T5G3.DOMR = 0D;
+            this.T5G3.DOMV = 0D;
+            this.T5G3.DOSP = 0D;
+            this.T5G3.Location = new System.Drawing.Point(472, 426);
+            this.T5G3.Margin = new System.Windows.Forms.Padding(5);
+            this.T5G3.Name = "T5G3";
+            this.T5G3.Padding = new System.Windows.Forms.Padding(5);
+            this.T5G3.Size = new System.Drawing.Size(220, 155);
+            this.T5G3.TabIndex = 22;
+            this.T5G3.Title = "GRID 53";
+            this.T5G3.ValveMR = 0D;
+            this.T5G3.ValveMV = 0D;
+            this.T5G3.ValveSP = 0D;
+            // 
+            // T4G3
+            // 
+            this.T4G3.AFlowMR = 0D;
+            this.T4G3.AFlowMV = 0D;
+            this.T4G3.AFlowSP = 0D;
+            this.T4G3.DOMR = 0D;
+            this.T4G3.DOMV = 0D;
+            this.T4G3.DOSP = 0D;
+            this.T4G3.Location = new System.Drawing.Point(242, 426);
+            this.T4G3.Margin = new System.Windows.Forms.Padding(5);
+            this.T4G3.Name = "T4G3";
+            this.T4G3.Padding = new System.Windows.Forms.Padding(5);
+            this.T4G3.Size = new System.Drawing.Size(220, 155);
+            this.T4G3.TabIndex = 21;
+            this.T4G3.Title = "GRID 34";
+            this.T4G3.ValveMR = 0D;
+            this.T4G3.ValveMV = 0D;
+            this.T4G3.ValveSP = 0D;
+            // 
+            // T3G3
+            // 
+            this.T3G3.AFlowMR = 0D;
+            this.T3G3.AFlowMV = 0D;
+            this.T3G3.AFlowSP = 0D;
+            this.T3G3.DOMR = 0D;
+            this.T3G3.DOMV = 0D;
+            this.T3G3.DOSP = 0D;
+            this.T3G3.Location = new System.Drawing.Point(12, 426);
+            this.T3G3.Margin = new System.Windows.Forms.Padding(5);
+            this.T3G3.Name = "T3G3";
+            this.T3G3.Padding = new System.Windows.Forms.Padding(5);
+            this.T3G3.Size = new System.Drawing.Size(220, 155);
+            this.T3G3.TabIndex = 20;
+            this.T3G3.Title = "GRID 33";
+            this.T3G3.ValveMR = 0D;
+            this.T3G3.ValveMV = 0D;
+            this.T3G3.ValveSP = 0D;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 411);
-            this.Controls.Add(this.tbValue3);
-            this.Controls.Add(this.tbValue2);
+            this.ClientSize = new System.Drawing.Size(704, 611);
+            this.Controls.Add(this.T5G3);
+            this.Controls.Add(this.T4G3);
+            this.Controls.Add(this.T3G3);
+            this.Controls.Add(this.tbPort);
+            this.Controls.Add(this.lpPort);
             this.Controls.Add(this.btRead);
-            this.Controls.Add(this.tbValue1);
             this.Controls.Add(this.lbConnectionString);
             this.Controls.Add(this.tbProgId);
             this.Controls.Add(this.lbProgId);
@@ -275,10 +321,12 @@ namespace TRAEGERKepware
         private System.Windows.Forms.TextBox tbProgId;
         private System.Windows.Forms.Label lbProgId;
         private System.Windows.Forms.Label lbConnectionString;
-        private System.Windows.Forms.TextBox tbValue1;
         private System.Windows.Forms.Button btRead;
-        private System.Windows.Forms.TextBox tbValue2;
-        private System.Windows.Forms.TextBox tbValue3;
+        private System.Windows.Forms.TextBox tbPort;
+        private System.Windows.Forms.Label lpPort;
+        private UCGrid T3G3;
+        private UCGrid T4G3;
+        private UCGrid T5G3;
     }
 }
 
