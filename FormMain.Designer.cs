@@ -29,6 +29,7 @@ namespace TRAEGERKepware
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbNodes = new System.Windows.Forms.ListBox();
             this.btBrowse = new System.Windows.Forms.Button();
             this.btConnect = new System.Windows.Forms.Button();
@@ -45,9 +46,11 @@ namespace TRAEGERKepware
             this.btRead = new System.Windows.Forms.Button();
             this.tbPort = new System.Windows.Forms.TextBox();
             this.lpPort = new System.Windows.Forms.Label();
+            this.btSubscribe = new System.Windows.Forms.Button();
             this.T5G3 = new TRAEGERKepware.UCGrid();
             this.T4G3 = new TRAEGERKepware.UCGrid();
             this.T3G3 = new TRAEGERKepware.UCGrid();
+            this.timerGUI = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbNodes
@@ -216,6 +219,17 @@ namespace TRAEGERKepware
             this.lpPort.TabIndex = 18;
             this.lpPort.Text = "Port";
             // 
+            // btSubscribe
+            // 
+            this.btSubscribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btSubscribe.Location = new System.Drawing.Point(493, 392);
+            this.btSubscribe.Name = "btSubscribe";
+            this.btSubscribe.Size = new System.Drawing.Size(199, 26);
+            this.btSubscribe.TabIndex = 23;
+            this.btSubscribe.Text = "SUBSCRIBE";
+            this.btSubscribe.UseVisualStyleBackColor = true;
+            this.btSubscribe.Click += new System.EventHandler(this.btSubscribe_Click);
+            // 
             // T5G3
             // 
             this.T5G3.AFlowMR = 0D;
@@ -273,11 +287,17 @@ namespace TRAEGERKepware
             this.T3G3.ValveMV = 0D;
             this.T3G3.ValveSP = 0D;
             // 
+            // timerGUI
+            // 
+            this.timerGUI.Interval = 500;
+            this.timerGUI.Tick += new System.EventHandler(this.timerGUI_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 611);
+            this.Controls.Add(this.btSubscribe);
             this.Controls.Add(this.T5G3);
             this.Controls.Add(this.T4G3);
             this.Controls.Add(this.T3G3);
@@ -327,6 +347,8 @@ namespace TRAEGERKepware
         private UCGrid T3G3;
         private UCGrid T4G3;
         private UCGrid T5G3;
+        private System.Windows.Forms.Button btSubscribe;
+        private System.Windows.Forms.Timer timerGUI;
     }
 }
 
