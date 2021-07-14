@@ -47,10 +47,10 @@ namespace TRAEGERKepware
             this.tbPort = new System.Windows.Forms.TextBox();
             this.lpPort = new System.Windows.Forms.Label();
             this.btSubscribe = new System.Windows.Forms.Button();
+            this.timerGUI = new System.Windows.Forms.Timer(this.components);
             this.T5G3 = new TRAEGERKepware.UCGrid();
             this.T4G3 = new TRAEGERKepware.UCGrid();
             this.T3G3 = new TRAEGERKepware.UCGrid();
-            this.timerGUI = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbNodes
@@ -230,6 +230,11 @@ namespace TRAEGERKepware
             this.btSubscribe.UseVisualStyleBackColor = true;
             this.btSubscribe.Click += new System.EventHandler(this.btSubscribe_Click);
             // 
+            // timerGUI
+            // 
+            this.timerGUI.Interval = 1000;
+            this.timerGUI.Tick += new System.EventHandler(this.timerGUI_Tick);
+            // 
             // T5G3
             // 
             this.T5G3.AFlowMR = 0D;
@@ -286,11 +291,6 @@ namespace TRAEGERKepware
             this.T3G3.ValveMR = 0D;
             this.T3G3.ValveMV = 0D;
             this.T3G3.ValveSP = 0D;
-            // 
-            // timerGUI
-            // 
-            this.timerGUI.Interval = 500;
-            this.timerGUI.Tick += new System.EventHandler(this.timerGUI_Tick);
             // 
             // FormMain
             // 

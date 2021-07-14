@@ -367,7 +367,7 @@ namespace TRAEGERKepware
                     item.Tag = index;
 
                     // Set a custom sampling interval on the monitored item.
-                    item.SamplingInterval = 500;
+                    item.SamplingInterval = 1000;
 
                     // Add the item to the subscription.
                     subscription.AddMonitoredItem(item);
@@ -392,7 +392,7 @@ namespace TRAEGERKepware
                 OpcMonitoredItem item = (OpcMonitoredItem)sender;
                 string value = e.Item.Value.ToString();
 
-                logger.Info(item.NodeId.Value.ToString());
+                // logger.Info(item.NodeId.Value.ToString());
                 // TODO: Update GUI on DataChanged
 #if DEBUG
                 if (item.NodeId.Value.ToString() == "Simulation Examples.Functions.Sine1")
@@ -445,8 +445,7 @@ namespace TRAEGERKepware
             catch (Exception E)
             {
                 logger.Debug(E.Message);
-            }
-            
+            }            
         }
 
         private void timerGUI_Tick(object sender, EventArgs e)
