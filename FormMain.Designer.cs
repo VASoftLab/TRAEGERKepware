@@ -44,13 +44,16 @@ namespace TRAEGERKepware
             this.lbProgId = new System.Windows.Forms.Label();
             this.lbConnectionString = new System.Windows.Forms.Label();
             this.btRead = new System.Windows.Forms.Button();
-            this.tbPort = new System.Windows.Forms.TextBox();
             this.lpPort = new System.Windows.Forms.Label();
             this.btSubscribe = new System.Windows.Forms.Button();
             this.timerGUI = new System.Windows.Forms.Timer(this.components);
+            this.lbTags = new System.Windows.Forms.ListBox();
+            this.btTags = new System.Windows.Forms.Button();
+            this.cbPort = new System.Windows.Forms.ComboBox();
             this.T5G3 = new TRAEGERKepware.UCGrid();
             this.T4G3 = new TRAEGERKepware.UCGrid();
             this.T3G3 = new TRAEGERKepware.UCGrid();
+            this.cbUsePort = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbNodes
@@ -198,17 +201,6 @@ namespace TRAEGERKepware
             this.btRead.UseVisualStyleBackColor = true;
             this.btRead.Click += new System.EventHandler(this.btRead_Click);
             // 
-            // tbPort
-            // 
-            this.tbPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbPort.Location = new System.Drawing.Point(106, 287);
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(95, 22);
-            this.tbPort.TabIndex = 19;
-            this.tbPort.Text = "49320";
-            // 
             // lpPort
             // 
             this.lpPort.AutoSize = true;
@@ -234,6 +226,40 @@ namespace TRAEGERKepware
             // 
             this.timerGUI.Interval = 1000;
             this.timerGUI.Tick += new System.EventHandler(this.timerGUI_Tick);
+            // 
+            // lbTags
+            // 
+            this.lbTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTags.FormattingEnabled = true;
+            this.lbTags.ItemHeight = 16;
+            this.lbTags.Location = new System.Drawing.Point(387, 13);
+            this.lbTags.Name = "lbTags";
+            this.lbTags.Size = new System.Drawing.Size(305, 372);
+            this.lbTags.TabIndex = 24;
+            // 
+            // btTags
+            // 
+            this.btTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btTags.Location = new System.Drawing.Point(281, 313);
+            this.btTags.Name = "btTags";
+            this.btTags.Size = new System.Drawing.Size(100, 26);
+            this.btTags.TabIndex = 25;
+            this.btTags.Text = "TAGS";
+            this.btTags.UseVisualStyleBackColor = true;
+            this.btTags.Click += new System.EventHandler(this.btTags_Click);
+            // 
+            // cbPort
+            // 
+            this.cbPort.FormattingEnabled = true;
+            this.cbPort.Items.AddRange(new object[] {
+            "49320",
+            "57412"});
+            this.cbPort.Location = new System.Drawing.Point(106, 288);
+            this.cbPort.Name = "cbPort";
+            this.cbPort.Size = new System.Drawing.Size(75, 21);
+            this.cbPort.TabIndex = 26;
             // 
             // T5G3
             // 
@@ -292,16 +318,29 @@ namespace TRAEGERKepware
             this.T3G3.ValveMV = 0D;
             this.T3G3.ValveSP = 0D;
             // 
+            // cbUsePort
+            // 
+            this.cbUsePort.AutoSize = true;
+            this.cbUsePort.Location = new System.Drawing.Point(187, 290);
+            this.cbUsePort.Name = "cbUsePort";
+            this.cbUsePort.Size = new System.Drawing.Size(67, 17);
+            this.cbUsePort.TabIndex = 27;
+            this.cbUsePort.Text = "Use Port";
+            this.cbUsePort.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 611);
+            this.Controls.Add(this.cbUsePort);
+            this.Controls.Add(this.cbPort);
+            this.Controls.Add(this.btTags);
+            this.Controls.Add(this.lbTags);
             this.Controls.Add(this.btSubscribe);
             this.Controls.Add(this.T5G3);
             this.Controls.Add(this.T4G3);
             this.Controls.Add(this.T3G3);
-            this.Controls.Add(this.tbPort);
             this.Controls.Add(this.lpPort);
             this.Controls.Add(this.btRead);
             this.Controls.Add(this.lbConnectionString);
@@ -342,13 +381,16 @@ namespace TRAEGERKepware
         private System.Windows.Forms.Label lbProgId;
         private System.Windows.Forms.Label lbConnectionString;
         private System.Windows.Forms.Button btRead;
-        private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Label lpPort;
         private UCGrid T3G3;
         private UCGrid T4G3;
         private UCGrid T5G3;
         private System.Windows.Forms.Button btSubscribe;
         private System.Windows.Forms.Timer timerGUI;
+        private System.Windows.Forms.ListBox lbTags;
+        private System.Windows.Forms.Button btTags;
+        private System.Windows.Forms.ComboBox cbPort;
+        private System.Windows.Forms.CheckBox cbUsePort;
     }
 }
 

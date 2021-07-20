@@ -108,7 +108,9 @@ namespace TRAEGERKepware
             else
             {
                 MessageBox.Show("The tag-list.csv not found!", "Error", icon: MessageBoxIcon.Warning, buttons: MessageBoxButtons.OK);
-            }            
+            }
+
+            cbPort.SelectedIndex = 0;
         }
 
         #region Get OPC Server Data
@@ -151,12 +153,43 @@ namespace TRAEGERKepware
                     tbClassId.Text = selected.ClassId.ToString();
                     tbProgId.Text = selected.ProgId;
 
-                    string port = tbPort.Text;
+                    string port = cbPort.Text;
                     string progId = selected.ProgId;
                     string classId = selected.ClassId.ToString().ToUpper();
-                    tbConnectionString.Text = $"opc.com://localhost:{port}/{progId}/{classId}";
+                    if (cbUsePort.Checked)
+                        tbConnectionString.Text = $"opc.com://localhost:{port}/{progId}/{classId}";
+                    else
+                        tbConnectionString.Text = $"opc.com://localhost/{progId}/{classId}";
                 }
             }
+        }
+
+        private void BrowseNode()
+        {
+            if (client == null)
+                return;
+
+            lbTags.Items.Clear();
+
+            var node = client.BrowseNode(OpcObjectTypes.ObjectsFolder);
+            
+            Browse(node);
+        }
+
+        private void Browse(OpcNodeInfo node)
+        {
+            if (node.Category == OpcNodeCategory.Variable)
+            {
+                if (node.NodeId.ToString().Contains("ns=2;"))
+                {
+                    lbTags.Items.Add(String.Format("{0}:\t{1}", node.Attribute(OpcAttribute.DisplayName).Value, node.NodeId));
+                }                
+            }
+
+            foreach (var childNode in node.Children())
+            {
+                Browse(childNode);
+            }   
         }
         #endregion
 
@@ -214,7 +247,7 @@ namespace TRAEGERKepware
         #region Connect / Dosconnect OnClick
         private void btConnect_Click(object sender, EventArgs e)
         {
-            string connectionString = tbConnectionString.Text;
+            string connectionString = tbConnectionString.Text;            
 
             if (!String.IsNullOrEmpty(connectionString))
             {
@@ -229,8 +262,8 @@ namespace TRAEGERKepware
         {
             OPCDisconnect();
 
-            if (timerGUI.Enabled)
-                timerGUI.Stop();
+            //if (timerGUI.Enabled)
+            //    timerGUI.Stop();
         }
         #endregion
 
@@ -258,6 +291,8 @@ namespace TRAEGERKepware
             //plant.T3G3.ValveReadings = Convert.ToDouble(client.ReadNode("ns=2;s=Simulation Examples.Functions.Sine1").Value);
 
 #if DEBUG
+            var value = client.ReadNode("ns=2;s=Simulation Examples.Functions.Sine1").Value;
+
             plant.T3G3.ValveReadings = Convert.ToDouble(client.ReadNode("ns=2;s=Simulation Examples.Functions.Sine1").Value);
             plant.T4G3.ValveReadings = Convert.ToDouble(client.ReadNode("ns=2;s=Simulation Examples.Functions.Sine2").Value);
             plant.T5G3.ValveReadings = Convert.ToDouble(client.ReadNode("ns=2;s=Simulation Examples.Functions.Sine3").Value);
@@ -376,8 +411,8 @@ namespace TRAEGERKepware
                 // After adding the items (or configuring the subscription), apply the changes.
                 subscription.ApplyChanges();
 
-                if (!timerGUI.Enabled)
-                    timerGUI.Start();
+                //if (!timerGUI.Enabled)
+                //    timerGUI.Start();
                 #endregion
             }
             else
@@ -396,50 +431,174 @@ namespace TRAEGERKepware
                 // TODO: Update GUI on DataChanged
 #if DEBUG
                 if (item.NodeId.Value.ToString() == "Simulation Examples.Functions.Sine1")
+                {
                     plant.T3G3.ValveReadings = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.ValveMR = plant.T3G3.ValveReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "Simulation Examples.Functions.Sine2")
+                {
                     plant.T4G3.ValveReadings = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.ValveMR = plant.T4G3.ValveReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "Simulation Examples.Functions.Sine3")
+                {
                     plant.T5G3.ValveReadings = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.ValveMR = plant.T5G3.ValveReadings;
+                    }));
+                }                    
 #else
                 if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.Airflow.MeterReadings")
+                {
                     plant.T3G3.ValveReadings = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.ValveMR = plant.T3G3.ValveReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.Airflow.SetPoint")
+                {
                     plant.T3G3.ValveSetpoint = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.ValveSP = plant.T3G3.ValveSetpoint;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.Airflow.MeterReadings")
+                {
                     plant.T3G3.AirflowReadings = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.AFlowMR = plant.T3G3.AirflowReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.Airflow.SetPoint")
+                {
                     plant.T3G3.AirflowSetpoint = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.AFlowSP = plant.T3G3.AirflowSetpoint;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.DO.MeterReadings")
+                {
                     plant.T3G3.DOReadings = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.DOMR = plant.T3G3.DOReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank3.Grid3.DO.SetPoint")
+                {
                     plant.T3G3.DOSetpoint = Convert.ToDouble(value);
-
-                if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.MeterReadings")
-                    plant.T4G3.ValveReadings = Convert.ToDouble(value);
-                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.SetPoint")
-                    plant.T4G3.ValveSetpoint = Convert.ToDouble(value);
+                    T3G3.BeginInvoke(new Action(() =>
+                    {
+                        T3G3.DOSP = plant.T3G3.DOSetpoint;
+                    }));
+                }
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.MeterReadings")
-                    plant.T4G3.AirflowReadings = Convert.ToDouble(value);
+                {
+                    plant.T4G3.ValveReadings = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.ValveMR = plant.T4G3.ValveReadings;
+                    }));
+                }
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.SetPoint")
+                {
+                    plant.T4G3.ValveSetpoint = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.ValveSP = plant.T4G3.ValveSetpoint;
+                    }));
+                }
+                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.MeterReadings")
+                {
+                    plant.T4G3.AirflowReadings = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.AFlowMR = plant.T4G3.AirflowReadings;
+                    }));
+                }
+                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.Airflow.SetPoint")
+                {
                     plant.T4G3.AirflowSetpoint = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.AFlowSP = plant.T4G3.AirflowSetpoint;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.DO.MeterReadings")
+                {
                     plant.T4G3.DOReadings = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.DOMR = plant.T4G3.DOReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank4.Grid3.DO.SetPoint")
+                {
                     plant.T4G3.DOSetpoint = Convert.ToDouble(value);
-
-                if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.MeterReadings")
-                    plant.T5G3.ValveReadings = Convert.ToDouble(value);
-                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.SetPoint")
-                    plant.T5G3.ValveSetpoint = Convert.ToDouble(value);
+                    T4G3.BeginInvoke(new Action(() =>
+                    {
+                        T4G3.DOSP = plant.T4G3.DOSetpoint;
+                    }));
+                }
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.MeterReadings")
-                    plant.T5G3.AirflowReadings = Convert.ToDouble(value);
+                {
+                    plant.T5G3.ValveReadings = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.ValveMR = plant.T5G3.ValveReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.SetPoint")
+                {
+                    plant.T5G3.ValveSetpoint = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.ValveSP = plant.T5G3.ValveSetpoint;
+                    }));
+                }                    
+                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.MeterReadings")
+                {
+                    plant.T5G3.AirflowReadings = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.AFlowMR = plant.T5G3.AirflowReadings;
+                    }));
+                }                    
+                else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.Airflow.SetPoint")
+                {
                     plant.T5G3.AirflowSetpoint = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.AFlowSP = plant.T5G3.AirflowSetpoint;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.DO.MeterReadings")
-                    plant.T5G3.DOReadings = Convert.ToDouble(value);
+                {
+                    plant.T5G3.AirflowSetpoint = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.DOMR = plant.T5G3.DOReadings;
+                    }));
+                }                    
                 else if (item.NodeId.Value.ToString() == "PlantDO.PLCB.Tank5.Grid3.DO.SetPoint")
-                    plant.T5G3.DOSetpoint = Convert.ToDouble(value);
+                {
+                    plant.T5G3.AirflowSetpoint = Convert.ToDouble(value);
+                    T5G3.BeginInvoke(new Action(() =>
+                    {
+                        T5G3.DOSP = plant.T5G3.DOSetpoint;
+                    }));
+                }                    
 #endif
             }
             catch (Exception E)
@@ -451,6 +610,11 @@ namespace TRAEGERKepware
         private void timerGUI_Tick(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private void btTags_Click(object sender, EventArgs e)
+        {
+            BrowseNode();
         }
     }
 }
